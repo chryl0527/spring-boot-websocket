@@ -34,6 +34,16 @@ public class WebSocketServer {
         //将用户session,session和用户名对应关系存入本地缓存
         sessionSet.add(session);
         Map<String, List<String>> pathParameters = session.getRequestParameterMap();
+        String userId = pathParameters.get("toUserId").get(0);
+        sessionMap.put(session.getId(), userId);
+        log.info("有链接加入,当前连接数为:{}", onlineCount.incrementAndGet());
+
+        try {
+            //通知所有用户新用户上线
+//            broadCastInfo("系统通知@^用户[" + userId + "]加入群聊");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
     //
